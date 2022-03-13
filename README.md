@@ -6,4 +6,4 @@ the objective is to classify correctly wich phrase is the speaker uttering...
 
 WORK IN PROGRESS.....\\
 
-
+Finishin in June,
