@@ -15,6 +15,7 @@ from keras.layers import Dense, LSTM
 from keras.layers.embeddings import Embedding
 from keras.preprocessing import sequence
 from keras.layers import SimpleRNN
+import keras
 from sklearn.utils import resample
 
 from itertools import compress
@@ -23,15 +24,15 @@ labels = pd.DataFrame(columns=['person' , 'sentence' , 'attemp' , 'frame'])
 in_matrix = None
 labels_matrix = None
 
-for person in os.listdir("lip_reading/words"):
-    for sentence in os.listdir("lip_reading/words/%s" % person):
-        for attemp in os.listdir("lip_reading/words/%s/%s" % (person, sentence)):
-            for frame in sorted(os.listdir("lip_reading/words/%s/%s/%s" % (person, sentence, attemp))):
-                im = cv.imread("lip_reading/words/%s/%s/%s/%s" % (person, sentence, attemp, frame), cv.IMREAD_GRAYSCALE)
+for person in os.listdir("lip_reading/mouths"):
+    for sentence in os.listdir("lip_reading/mouths/%s" % person):
+        for attemp in os.listdir("lip_reading/mouths/%s/%s" % (person, sentence)):
+            for frame in sorted(os.listdir("lip_reading/mouths/%s/%s/%s" % (person, sentence, attemp))):
+                im = cv.imread("lip_reading/mouths/%s/%s/%s/%s" % (person, sentence, attemp, frame), cv.IMREAD_GRAYSCALE)
                 #sizes.append(im.shape) 
                 im = cv.resize(im, [32, 16], interpolation= cv.INTER_CUBIC)
                 vec = im.reshape(32*16)
-                size = np.array([len(os.listdir("lip_reading/words/%s/%s/%s" % (person, sentence, attemp))), person, int(sentence), int(attemp), frame])
+                size = np.array([len(os.listdir("lip_reading/mouths/%s/%s/%s" % (person, sentence, attemp))), person, int(sentence), int(attemp), frame])
                 try:
                     in_matrix = np.vstack((in_matrix, vec))
                     labels_matrix = np.vstack((labels_matrix, size))
@@ -138,4 +139,4 @@ clf.fit(hmms)
 # predictions = clf.predict(X_validation_3d)
 accuracy, confusion = clf.evaluate(X_validation_3d, y_validation)
 accuracy, confusion = clf.evaluate(X_train_3d, y_train)
-accuracy, confusion = clf.evaluate(X_test_3d, y_test)
+
