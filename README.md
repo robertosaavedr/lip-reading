@@ -6,7 +6,11 @@ the dataset used is https://sites.google.com/site/achrafbenhamadou/-datasets/mir
 
 ### description of the scripts and files
 tfg.pdf is my thesis document in spanish
+
 get_lips.py is the script to crop the lips region and save it
+
 end_to_end_nn_phrases.py is the script that takes the cropped images and implement an end-to-end neural network (3DCONV + LSTM), phrases in the title means that uses the dataset of phrases of the link above, meanwhile words means that it uses the dataset with words
+
 hmm_phrases.py pca + hidden markov model
+
 svm_phrases.py pca + svm
